@@ -1,26 +1,21 @@
-@import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-.login-container {
+/* Add these styles to your CSS or Tailwind config */
+.loginContainer {
   max-width: 400px;
   margin: auto;
   padding: 2rem;
   text-align: center;
 }
 
-.login-form {
+.loginForm {
   display: flex;
   flex-direction: column;
 }
 
-.form-group {
+.formGroup {
   margin-bottom: 1rem;
 }
 
-.input-field {
+.inputField {
   padding: 0.5rem;
   margin-top: 0.25rem;
   width: 100%;
@@ -28,7 +23,7 @@
   border: 1px solid #ccc;
 }
 
-.submit-button {
+.submitButton {
   padding: 0.75rem;
   background-color: #4CAF50;
   color: white;
@@ -37,7 +32,7 @@
   cursor: pointer;
 }
 
-.error-message {
+.errorMessage {
   color: red;
   font-size: 0.875rem;
   margin-top: 0.5rem;
