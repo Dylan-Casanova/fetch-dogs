@@ -64,7 +64,9 @@ const LoginPage = () => {
     <div className={styles.container}>
       <form onSubmit={handleLogin} className={styles.loginForm}>
         <div className={styles.formHeading}>
-          <PiDogLight />
+          <h5 className="text-shadow-xs">
+            Every Hero Needs a Sidekick – Adopt!
+          </h5>
         </div>
 
         <div className={styles.inputGroup}>

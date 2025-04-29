@@ -14,7 +14,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  background-image: url('/public/loginPageBg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat-y;
+  height: 100vh;
+  margin: 0; 
 }
 
 .loginForm {
@@ -32,7 +37,9 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 25px;
-  font-size: 4.5rem;
+  font-size: 1.5rem;
+  color: rgba(164, 149, 149, 0.73);
+  font-weight: 500;
 }
 
 .inputGroup {
@@ -75,22 +82,6 @@
   opacity: 1;
 }
 
-.forgot-password {
-  text-align: right;
-  margin-bottom: 20px;
-}
-
-.forgot-password a {
-  font-size: 14px;
-  color: #58bc82;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.forgot-password a:hover {
-  color: #45a56b;
-}
-
 .submit {
   width: 100%;
   padding: 15px;
@@ -108,23 +99,6 @@
   background-color: #45a56b;
   transform: translateY(-2px);
   box-shadow: 0 5px 20px rgba(88, 188, 130, 0.3);
-}
-
-.signup-link {
-  text-align: center;
-  font-size: 14px;
-  color: #333;
-}
-
-.signup-link a {
-  color: #58bc82;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.signup-link a:hover {
-  color: #45a56b;
 }
 
 @keyframes fadeIn {

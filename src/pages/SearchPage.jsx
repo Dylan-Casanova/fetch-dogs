@@ -14,7 +14,7 @@ const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState(() => {
-    if (!user) return []; // No favorites if not logged in
+    if (!user) return [];
     const saved = localStorage.getItem(user.email);
     return saved ? JSON.parse(saved) : [];
   });
@@ -94,7 +94,6 @@ const SearchPage = () => {
 
     setFavorites(updatedFavorites);
 
-    // Save updated favorites to localStorage under the user's email
     if (user) {
       localStorage.setItem(user.email, JSON.stringify(updatedFavorites));
     }
@@ -105,7 +104,7 @@ const SearchPage = () => {
   }, [selectedBreed, sortField, sortDirection]);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container  p-4 search-page">
       <h1 className="text-2xl font-bold mb-4">Search Dogs</h1>
 
       {/* Filters */}
@@ -174,7 +173,7 @@ const SearchPage = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="search-results  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-8">
           {dogs.length > 0 ? (
             dogs.map((dog) => (
               <DogCard
