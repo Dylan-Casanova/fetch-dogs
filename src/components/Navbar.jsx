@@ -18,7 +18,7 @@ const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    setIsMenuOpen(false); // Close mobile menu on route change
+    setIsMenuOpen(false);
   }, [location]);
 
   const handleLogout = async () => {
@@ -36,77 +36,77 @@ const Navbar = () => {
         logout();
         navigate("/");
       } else {
-        throw new Error("Logout failed on server.");
+        alert("Logout failed on server.");
       }
     } catch (error) {
-      console.error("Network error during logout:", error);
-      alert("Something went wrong. Please try again.");
+      alert("Network error during logout:", error);
     } finally {
       setIsLoggingOut(false);
     }
   };
 
   return (
-    <nav className="bg-transparent shadow-sm navbar text-white p-4">
+    <nav className=" bg-[#9FDCE2] shadow-md py-3 ">
       <div className="container mx-auto flex items-center justify-between p-4">
         <div className="flex items-center">
           <Link
             to="/search"
-            className="text-xl lg:text-2xl font-bold"
+            className="text-gray-700 text-xl lg:text-2xl font-bold"
           >
             BF Finder
           </Link>
         </div>
 
-        <div className="hidden md:flex gap-8 items-center">
-          <Link to="/search" className="text-xl  hover:text-gray-200">
+        <div className="hidden md:flex gap-8 items-center text-gray-700">
+          <Link
+            to="/search"
+            className="text-xl text-gray-700 hover:text-gray-200"
+          >
             Find a Buddy
           </Link>
-          <Link to="/favorites" className="text-xl  hover:text-gray-200">
+          <Link to="/favorites" className="text-xl hover:text-gray-200">
             Your Favorites
           </Link>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 text-gray-700">
           {user && (
-            <span className="text-base lg:text-lg">
+            <span className=" text-base lg:text-lg">
               {capitalizeName(user.name)}
             </span>
           )}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4 text-gray-700">
             <LogoutButton isLoggingOut={isLoggingOut} onClick={handleLogout} />
           </div>
           <button
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle Menu"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-menu"
           >
-            <RxHamburgerMenu className="w-6 h-6 text-gray-900" />
+            <RxHamburgerMenu className="w-6 h-6 text-white" />
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div
-          id="mobile-menu"
-          className="flex flex-col items-center gap-4 p-4 md:hidden transition-all ease-in-out duration-300"
-        >
-          <Link
-            to="/search"
-            className="text-lg text-gray-900 hover:text-gray-200"
-          >
+        <div className="flex flex-col items-center gap-4 p-4 md:hidden">
+          <Link to="/search" className="text-lg text-white hover:text-gray-200">
             Find a Buddy
           </Link>
           <Link
             to="/favorites"
-            className="text-lg text-gray-900 hover:text-gray-200"
+            className="text-lg text-white hover:text-gray-200"
           >
             Your Favorites
           </Link>
-          <LogoutButton isLoggingOut={isLoggingOut} onClick={handleLogout} />
+          <button
+            onClick={handleLogout}
+            className="bg-orange-500 text-white text-lg px-4 py-2 rounded-md hover:bg-orange-700"
+            disabled={isLoggingOut}
+          >
+            {isLoggingOut ? "Logging out..." : "Logout"}
+          </button>
         </div>
       )}
     </nav>

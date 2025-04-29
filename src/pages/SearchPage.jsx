@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import DogCard from "../components/DogCard";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { GoChevronDown } from "react-icons/go";
 
 const SearchPage = () => {
   const { user } = useAuth();
@@ -14,7 +16,7 @@ const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState(() => {
-    if (!user) return [];
+    if (!user) return []; // No favorites if not logged in
     const saved = localStorage.getItem(user.email);
     return saved ? JSON.parse(saved) : [];
   });
@@ -94,6 +96,7 @@ const SearchPage = () => {
 
     setFavorites(updatedFavorites);
 
+    // Save updated favorites to localStorage under the user's email
     if (user) {
       localStorage.setItem(user.email, JSON.stringify(updatedFavorites));
     }
@@ -104,65 +107,174 @@ const SearchPage = () => {
   }, [selectedBreed, sortField, sortDirection]);
 
   return (
-    <div className="container  p-4 search-page">
-      <h1 className="text-2xl font-bold mb-4">Search Dogs</h1>
+    <div className="container mx-auto p-4 sm:grid search-page">
+      <div className="flex justify-between items-center border-b-1 border-gray-200 mb-20">
+        <h1 className="text-3xl font-bold">Search Dogs</h1>
 
-      {/* Filters */}
-      <div className="flex flex-wrap gap-4 mb-6">
-        <div>
-          <label htmlFor="breed" className="mr-2">
-            Breed:
-          </label>
-          <select
-            id="breed"
-            value={selectedBreed}
-            onChange={(e) => setSelectedBreed(e.target.value)}
-            className="border p-2 rounded"
-          >
-            <option value="">All Breeds</option>
-            {breeds.map((breed) => (
-              <option key={breed} value={breed}>
-                {breed}
-              </option>
-            ))}
-          </select>
-        </div>
+        {/* Filters */}
+        <div className="grid">
+          <p className="place-self-start">Filters:</p>
+          <div className="flex justify-end gap-4 mb-6 text-gray-900">
+            {/* Breed dropdown menu */}
+            <Menu as="div" className="relative inline-block text-left">
+              {/* <p>Filter Results:</p> */}
+              <div>
+                <MenuButton className="flex justify-between min-w-60 rounded-md bg-white px-3 py-2 text-md text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
+                  {selectedBreed || "All Breeds"}
+                  <GoChevronDown
+                    aria-hidden="true"
+                    className="-mr-1 mt-0.5 size-5 text-gray-400"
+                  />
+                </MenuButton>
+              </div>
 
-        <div>
-          <label htmlFor="sortField" className="mr-2">
-            Sort by:
-          </label>
-          <select
-            id="sortField"
-            value={sortField}
-            onChange={(e) => setSortField(e.target.value)}
-            className="border p-2 rounded"
-          >
-            <option value="breed">Breed</option>
-            <option value="name">Name</option>
-            <option value="age">Age</option>
-          </select>
-        </div>
+              <MenuItems
+                transition
+                className="absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white shadow-lg max-h-60 overflow-y-auto ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+              >
+                <MenuItem>
+                  {({ active }) => (
+                    <button
+                      onClick={() => setSelectedBreed("")}
+                      className={`block w-full text-left px-4 py-2 text-sm ${
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700"
+                      }`}
+                    >
+                      All Breeds
+                    </button>
+                  )}
+                </MenuItem>
+                {breeds.map((breed) => (
+                  <div key={breed} className="py-1">
+                    <MenuItem>
+                      {({ active }) => (
+                        <button
+                          onClick={() => setSelectedBreed(breed)}
+                          className={`block w-full text-left px-4 py-2 text-sm ${
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700"
+                          }`}
+                        >
+                          {breed}
+                        </button>
+                      )}
+                    </MenuItem>
+                  </div>
+                ))}
+              </MenuItems>
+            </Menu>
 
-        <div>
-          <label htmlFor="sortDirection" className="mr-2">
-            Direction:
-          </label>
-          <select
-            id="sortDirection"
-            value={sortDirection}
-            onChange={(e) => setSortDirection(e.target.value)}
-            className="border p-2 rounded"
-          >
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
+            {/* Sort dropdown menu */}
+            <Menu as="div" className="relative inline-block text-left">
+              {/* <p>Sort:</p> */}
+              <div>
+                <MenuButton className="flex justify-between w-24 rounded-md bg-white px-3 py-2 text-md text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
+                  {sortField.charAt(0).toUpperCase() + sortField.slice(1)}
+                  <GoChevronDown
+                    aria-hidden="true"
+                    className="-mr-1 mt-0.5 size-5 text-gray-400"
+                  />
+                </MenuButton>
+              </div>
+
+              <MenuItems
+                transition
+                className="absolute right-0 z-10 mt-2 w-24 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none max-h-60 overflow-y-auto"
+              >
+                <div className="py-1">
+                  <MenuItem>
+                    {({ active }) => (
+                      <button
+                        onClick={() => setSortField("breed")}
+                        className={`block w-full px-4 py-2 text-left text-sm ${
+                          active ? "bg-gray-100 text-gray-900" : "text-gray-700"
+                        }`}
+                      >
+                        Breed
+                      </button>
+                    )}
+                  </MenuItem>
+                  <MenuItem>
+                    {({ active }) => (
+                      <button
+                        onClick={() => setSortField("name")}
+                        className={`block w-full px-4 py-2 text-left text-sm ${
+                          active ? "bg-gray-100 text-gray-900" : "text-gray-700"
+                        }`}
+                      >
+                        Name
+                      </button>
+                    )}
+                  </MenuItem>
+                  <MenuItem>
+                    {({ active }) => (
+                      <button
+                        onClick={() => setSortField("age")}
+                        className={`block w-full px-4 py-2 text-left text-sm ${
+                          active ? "bg-gray-100 text-gray-900" : "text-gray-700"
+                        }`}
+                      >
+                        Age
+                      </button>
+                    )}
+                  </MenuItem>
+                </div>
+              </MenuItems>
+            </Menu>
+
+            {/* Order dropdown menu */}
+
+            <Menu as="div" className="relative inline-block text-left">
+              <div>
+                <MenuButton className="flex justify-between w-32 rounded-md bg-white px-3 py-2 text-md text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
+                  {sortDirection === "asc" ? "Ascending" : "Descending"}
+                  <GoChevronDown
+                    aria-hidden="true"
+                    className="-mr-1 size-5 text-gray-400"
+                  />
+                </MenuButton>
+              </div>
+
+              <MenuItems
+                transition
+                className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+              >
+                <div className="py-1">
+                  <MenuItem>
+                    {({ active }) => (
+                      <button
+                        onClick={() => setSortDirection("asc")}
+                        className={`block w-full px-4 py-2 text-left text-sm ${
+                          active ? "bg-gray-100 text-gray-900" : "text-gray-700"
+                        }`}
+                      >
+                        Ascending
+                      </button>
+                    )}
+                  </MenuItem>
+                  <MenuItem>
+                    {({ active }) => (
+                      <button
+                        onClick={() => setSortDirection("desc")}
+                        className={`block w-full px-4 py-2 text-left text-sm ${
+                          active ? "bg-gray-100 text-gray-900" : "text-gray-700"
+                        }`}
+                      >
+                        Descending
+                      </button>
+                    )}
+                  </MenuItem>
+                </div>
+              </MenuItems>
+            </Menu>
+          </div>
         </div>
       </div>
 
       {/* Main Content */}
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-8">
           {Array.from({ length: 6 }).map((_, idx) => (
             <div
               key={idx}
@@ -173,7 +285,7 @@ const SearchPage = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (
-        <div className="search-results  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-8 max-w-screen">
           {dogs.length > 0 ? (
             dogs.map((dog) => (
               <DogCard

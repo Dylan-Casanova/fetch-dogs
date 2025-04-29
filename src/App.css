@@ -6,11 +6,13 @@
 }
 
 .navbar {
-background-image: linear-gradient(to top, #9fdce2, #80c3cb, #61abb5, #40939f, #127c8a);
+/* background-image: linear-gradient(to top, #9fdce2, #80c3cb, #61abb5, #40939f, #127c8a);  */
+background-color: #9FDCE2;
 }
 
 .search-page {
-  background-image: url("/public/backgroundSearch.jpg");
+  /* background-image: url("/public/backgroundSearch.jpg"); */
+  background-color: #ebfdfe;
   background-size: cover;
   background-position: center;
   background-repeat: repeat-y;
