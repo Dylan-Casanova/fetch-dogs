@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { PiDogLight } from "react-icons/pi";
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -60,43 +61,45 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
-      <h1>Find Your New Best Friend – Log In to Start Searching!</h1>
+    <div className={styles.container}>
       <form onSubmit={handleLogin} className={styles.loginForm}>
-        <div className={styles.formGroup}>
-          <label htmlFor="name">Name</label>
+        <div className={styles.formHeading}>
+          <PiDogLight />
+        </div>
+
+        <div className={styles.inputGroup}>
+          <label className={styles.label} htmlFor="name">
+            Name
+          </label>
           <input
-            type="text"
-            id="name"
-            value={name}
             onChange={(e) => setName(e.target.value)}
             required
             placeholder="Enter your name"
-            className={styles.inputField}
+            value={name}
+            name="name"
+            id="name"
+            type="text"
           />
         </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="email">Email</label>
+        <div className={styles.inputGroup}>
+          <label className={styles.label} htmlFor="email">
+            Email
+          </label>
           <input
-            type="email"
-            id="email"
-            value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             placeholder="Enter your email"
-            className={styles.inputField}
+            name="email"
+            id="email"
+            type="email"
           />
         </div>
 
         {error && <p className={styles.errorMessage}>{error}</p>}
 
-        <button
-          type="submit"
-          className={styles.submitButton}
-          disabled={isLoading}
-        >
-          {isLoading ? "Logging in..." : "Login"}
+        <button disabled={isLoading} className={styles.submit} type="submit">
+          Log In
         </button>
       </form>
     </div>

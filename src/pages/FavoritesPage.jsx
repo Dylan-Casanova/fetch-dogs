@@ -172,6 +172,7 @@ const FavoritesPage = () => {
               dog={match}
               isFavorite={favorites.includes(match.id)}
               onToggleFavorite={handleToggleFavorite}
+              showFavoriteButton={false}
             />
           </div>
         </motion.div>
