@@ -44,10 +44,11 @@ const Navbar = () => {
           Fetch Dogs
         </Link>
 
-        <Link to="/favorites" className="text-white hover:text-gray-200">
-          Favorites
-        </Link>
         <div className="space-x-4">
+          <Link to="/favorites" className="text-white hover:text-gray-200">
+            Favorites
+          </Link>
+
           {user ? (
             <>
               <span className="text-white">
@@ -61,14 +62,7 @@ const Navbar = () => {
                 <LuLogOut />
               </button>
             </>
-          ) : (
-            <Link
-              to="/"
-              className="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800"
-            >
-              Login
-            </Link>
-          )}
+          ) : null}
         </div>
       </div>
     </nav>
