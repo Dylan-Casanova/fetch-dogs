@@ -4,23 +4,28 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import LoginPage from "./pages/LoginPage";
-// import SearchPage from "./pages/SearchPage";
+import Navbar from "./components/Navbar";
 import "./App.css";
 import "./index.css";
+
+
+const FavoritesPage = lazy(() => import("./pages/FavoritesPage"));
+const SearchPage = lazy(() => import("./pages/SearchPage"));
 
 function App() {
   return (
     <>
-      <div>
-        helloworld
-      </div>
       <Router>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          {/* <Route path="/search" element={<SearchPage />} /> */}
-          {/* <Route path="*" element={<Navigate to="/" />} /> */}
-        </Routes>
+        <Navbar />
+        <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+          </Routes>
+        </Suspense>
       </Router>
     </>
   );

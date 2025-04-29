@@ -1,21 +1,36 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styles from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const LoginPage = () => {
-  const { setUser } = useContext(AuthContext);
+  const { login } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  // Handle form submission
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    if (!name || !email) {
+      setError("Please enter both name and email.");
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
     try {
-      
       const response = await fetch(
         "https://frontend-take-home-service.fetch.com/auth/login",
         {
@@ -23,27 +38,44 @@ const LoginPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ name, email }),
+          credentials: "include",
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Invalid login credentials");
+      if (response.ok) {
+        login({ name, email });
+        setEmail("");
+        setName("");
+        navigate("/search");
+      } else {
+        setError("Invalid login credentials. Please try again.");
       }
-
-      const data = await response.json();
-      setUser(data.user);
-      navigate("/search");
-    } catch (error) {
-        console.log(error);
-      setError("Login failed. Please check your credentials and try again.");
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className={styles.loginContainer}>
-      <h1>Login to Fetch Dogs</h1>
+      <h1>Find Your New Best Friend – Log In to Start Searching!</h1>
       <form onSubmit={handleLogin} className={styles.loginForm}>
+        <div className={styles.formGroup}>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            placeholder="Enter your name"
+            className={styles.inputField}
+          />
+        </div>
+
         <div className={styles.formGroup}>
           <label htmlFor="email">Email</label>
           <input
@@ -56,21 +88,15 @@ const LoginPage = () => {
             className={styles.inputField}
           />
         </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Enter your password"
-            className={styles.inputField}
-          />
-        </div>
+
         {error && <p className={styles.errorMessage}>{error}</p>}
-        <button type="submit" className={styles.submitButton}>
-          Login
+
+        <button
+          type="submit"
+          className={styles.submitButton}
+          disabled={isLoading}
+        >
+          {isLoading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
