@@ -7,7 +7,7 @@ const DogCard = ({ dog, isFavorite, onToggleFavorite }) => {
       <img
         src={dog.img}
         alt={dog.name}
-        className="w-full h-48 object-cover rounded mb-4"
+        className="w-full h-48 object-contain rounded-2xl mb-4"
         onError={(e) => (e.target.src = "/fallback-dog.png")}
       />
       <h2 className="text-lg font-semibold">{dog.name}</h2>

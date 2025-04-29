@@ -45,7 +45,7 @@ const SearchPage = () => {
   const buildQueryParams = (pageQuery = "") => {
     const params = new URLSearchParams(pageQuery);
     if (selectedBreed) params.set("breeds", selectedBreed);
-    params.set("size", "25");
+    params.set("size", "24");
     params.set("sort", `${sortField}:${sortDirection}`);
     return params;
   };

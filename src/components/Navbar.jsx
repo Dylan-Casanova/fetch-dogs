@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { LuLogOut } from "react-icons/lu";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -54,10 +55,10 @@ const Navbar = () => {
               </span>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700"
+                className="text-white px-2 py-2 rounded-md hover:bg-blue-300"
                 disabled={isLoggingOut}
               >
-                {isLoggingOut ? "Logging out..." : "Logout"}
+                <LuLogOut />
               </button>
             </>
           ) : (
