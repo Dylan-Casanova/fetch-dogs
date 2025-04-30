@@ -12,6 +12,7 @@ README
 ### Prerequisites
 
 - Node.js (v18 or higher)
+- Chrome browser
 
 ### Installation
 
