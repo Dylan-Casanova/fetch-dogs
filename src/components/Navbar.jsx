@@ -51,9 +51,9 @@ const Navbar = () => {
         <div className="flex items-center">
           <Link
             to="/search"
-            className="text-gray-700 text-xl lg:text-2xl font-medium hover:text-[#f5f5f5]"
+            className="text-gray-700 text-xl lg:text-2xl font-bold hover:text-[#f5f5f5]"
           >
-            BF Finder
+            SideKick
           </Link>
         </div>
 

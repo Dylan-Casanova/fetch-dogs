@@ -220,8 +220,12 @@ const FavoritesPage = () => {
               transition={{ duration: 0.2 }}
             >
               <h2 className="text-xl font-bold mb-4">Clear Favorites</h2>
-              <p className="mb-6">
+              <p className="mb-4">
                 Are you sure you want to clear all favorite dogs?
+              </p>
+              <p className="mb-6">
+                You will not be able to generate a new match until you add new
+                favorites.
               </p>
               <div className="flex justify-end gap-4">
                 <button
