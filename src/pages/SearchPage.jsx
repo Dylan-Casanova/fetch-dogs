@@ -108,18 +108,18 @@ const SearchPage = () => {
 
   return (
     <div className="container mx-auto p-4 sm:grid search-page">
-      <div className="flex justify-between items-center border-b-1 border-gray-200 mb-20">
+      <div className="md:flex md:justify-between md:items-center border-b-1 border-gray-200 mb-20">
         <h1 className="text-2xl font-semibold text-gray-700">Search Dogs</h1>
 
         {/* Filters */}
-        <div className="grid">
+        <div>
           <p className="place-self-start">Filters:</p>
-          <div className="flex justify-end gap-4 mb-6 text-gray-900">
+          <div className="flex justify-start md:justify-end space-x-4 mb-6 text-gray-900">
             {/* Breed dropdown menu */}
             <Menu as="div" className="relative inline-block text-left">
               {/* <p>Filter Results:</p> */}
               <div>
-                <MenuButton className="flex justify-between min-w-60 rounded-md bg-white px-3 py-2 text-md text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
+                <MenuButton className="flex justify-between sm:w-60 rounded-md bg-white px-3 py-2 text-md text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
                   {selectedBreed || "All Breeds"}
                   <GoChevronDown
                     aria-hidden="true"
@@ -130,7 +130,7 @@ const SearchPage = () => {
 
               <MenuItems
                 transition
-                className="absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white shadow-lg max-h-60 overflow-y-auto ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                className="absolute left-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white shadow-lg max-h-60 overflow-y-auto ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
               >
                 <MenuItem>
                   {({ active }) => (
@@ -169,7 +169,7 @@ const SearchPage = () => {
             <Menu as="div" className="relative inline-block text-left">
               {/* <p>Sort:</p> */}
               <div>
-                <MenuButton className="flex justify-between w-24 rounded-md bg-white px-3 py-2 text-md text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
+                <MenuButton className="flex justify-between sm:w-24 rounded-md bg-white px-3 py-2 text-md text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
                   {sortField.charAt(0).toUpperCase() + sortField.slice(1)}
                   <GoChevronDown
                     aria-hidden="true"
@@ -180,7 +180,7 @@ const SearchPage = () => {
 
               <MenuItems
                 transition
-                className="absolute right-0 z-10 mt-2 w-24 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none max-h-60 overflow-y-auto"
+                className="absolute right-0 z-10 mt-2 sm:w-24 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none max-h-60 overflow-y-auto"
               >
                 <div className="py-1">
                   <MenuItem>
@@ -227,7 +227,7 @@ const SearchPage = () => {
 
             <Menu as="div" className="relative inline-block text-left">
               <div>
-                <MenuButton className="flex justify-between w-32 rounded-md bg-white px-3 py-2 text-md text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
+                <MenuButton className="flex justify-between sm:w-32 rounded-md bg-white px-3 py-2 text-md text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50">
                   {sortDirection === "asc" ? "Ascending" : "Descending"}
                   <GoChevronDown
                     aria-hidden="true"
@@ -238,7 +238,7 @@ const SearchPage = () => {
 
               <MenuItems
                 transition
-                className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+                className="absolute right-0 z-10 mt-2 sm:w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
               >
                 <div className="py-1">
                   <MenuItem>
@@ -274,13 +274,8 @@ const SearchPage = () => {
 
       {/* Main Content */}
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
-          {Array.from({ length: 6 }).map((_, idx) => (
-            <div
-              key={idx}
-              className="bg-gray-200 animate-pulse h-64 rounded-lg"
-            />
-          ))}
+        <div className="flex justify-center items-center h-64">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
       ) : error ? (
         <p className="text-red-500">{error}</p>
@@ -306,14 +301,14 @@ const SearchPage = () => {
         <button
           onClick={() => handlePagination(prev)}
           disabled={!prev || isLoading}
-          className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded disabled:opacity-50"
+          className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-lg disabled:opacity-50"
         >
           Previous
         </button>
         <button
           onClick={() => handlePagination(next)}
           disabled={!next || isLoading}
-          className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded disabled:opacity-50"
+          className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-lg disabled:opacity-50"
         >
           Next
         </button>

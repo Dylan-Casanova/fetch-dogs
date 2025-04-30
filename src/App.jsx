@@ -13,6 +13,12 @@ import "./index.css";
 const FavoritesPage = lazy(() => import("./pages/FavoritesPage"));
 const SearchPage = lazy(() => import("./pages/SearchPage"));
 
+const Spinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
+
 function App() {
   return (
     <Router>
@@ -30,7 +36,7 @@ function AppWithNavbar() {
         <Navbar />
       ) : null}
 
-      <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/search" element={<SearchPage />} />

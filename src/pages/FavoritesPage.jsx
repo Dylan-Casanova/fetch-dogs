@@ -131,17 +131,13 @@ const FavoritesPage = () => {
 
   return (
     <div className="container mx-auto p-4 mb-24">
-      <div
-        className="flex justify-between items-center py-6
-      border-b-1 border-gray-200 mb-20"
-      >
-        <h1 className="text-gray-700 text-2xl font-semibold">Your Favorites</h1>
-
-        <div className="flex gap-4">
+      <div className="md:flex md:justify-between items-center pt-0 md:pt-6 pb-6 border-b-1 border-gray-200 mb-20">
+        <h1 className="text-gray-700 text-2xl font-semibold pb-6 md:pb-0">Your Favorites</h1>
+        <div className="flex justify-center gap-4">
           <button
             disabled={favorites.length === 0}
             onClick={handleClearFavorites}
-            className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition disabled:opacity-50"
+            className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition disabled:opacity-50 disabled:hover:bg-gray-400"
           >
             Clear Favorites
           </button>
@@ -149,7 +145,7 @@ const FavoritesPage = () => {
           <button
             onClick={handleGenerateMatch}
             disabled={favorites.length === 0 || loadingMatch}
-            className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition disabled:opacity-50"
+            className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition disabled:opacity-50 disabled:hover:bg-teal-600"
           >
             {match ? "Generate New Match" : "Find Match"}
           </button>
