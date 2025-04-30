@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import DogCard from "../components/DogCard";
@@ -26,23 +25,32 @@ const SearchPage = () => {
   const [sortField, setSortField] = useState("breed");
   const [sortDirection, setSortDirection] = useState("asc");
 
-  useEffect(() => {
-    if (!user) navigate("/");
+ useEffect(() => {
+   if (!user) navigate("/");
 
-    const fetchBreeds = async () => {
-      try {
-        const { data } = await axios.get(
-          "https://frontend-take-home-service.fetch.com/dogs/breeds",
-          { withCredentials: true }
-        );
-        setBreeds(data);
-      } catch (err) {
-        setError(err.response?.data?.message || "Error fetching breeds");
-      }
-    };
+   const fetchBreeds = async () => {
+     try {
+       const res = await fetch(
+         "https://frontend-take-home-service.fetch.com/dogs/breeds",
+         {
+           method: "GET",
+           credentials: "include",
+         }
+       );
 
-    fetchBreeds();
-  }, [user, navigate]);
+       if (!res.ok) {
+         throw new Error("Failed to fetch breeds");
+       }
+
+       const data = await res.json();
+       setBreeds(data);
+     } catch (err) {
+       setError(err.message || "Error fetching breeds");
+     }
+   };
+
+   fetchBreeds();
+ }, [user, navigate]);
 
   const buildQueryParams = (pageQuery = "") => {
     const params = new URLSearchParams(pageQuery);
