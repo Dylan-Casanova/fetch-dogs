@@ -62,10 +62,10 @@ const Navbar = () => {
             to="/search"
             className="text-xl text-gray-700 hover:text-[#f5f5f5]"
           >
-            Find a Buddy
+            Find a pet
           </Link>
           <Link to="/favorites" className="text-xl hover:text-[#f5f5f5]">
-            Your Favorites
+            Favorites
           </Link>
         </div>
 
@@ -76,7 +76,11 @@ const Navbar = () => {
             </span>
           )}
           <div className="hidden md:flex items-center gap-4 text-gray-700">
-            <LogoutButton isLoggingOut={isLoggingOut} onClick={handleLogout} />
+            <LogoutButton
+              isLoggingOut={isLoggingOut}
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+            />
           </div>
           <button
             className="md:hidden"
@@ -91,22 +95,25 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="flex flex-col items-center gap-4 p-4 md:hidden">
-          <Link to="/search" className="text-lg text-white hover:text-gray-200">
-            Find a Buddy
+          <Link
+            to="/search"
+            className="text-lg text-gray-700 hover:text-[#f5f5f5]"
+          >
+            Find a pet
           </Link>
           <Link
             to="/favorites"
-            className="text-lg text-white hover:text-gray-200"
+            className="text-lg text-gray-700 hover:text-[#f5f5f5]"
           >
-            Your Favorites
+            Favorites
           </Link>
-          <button
-            onClick={handleLogout}
-            className="bg-orange-500 text-white text-lg px-4 py-2 rounded-md hover:bg-orange-700"
-            disabled={isLoggingOut}
-          >
-            {isLoggingOut ? "Logging out..." : "Logout"}
-          </button>
+          <div className="md:flex items-center gap-4 text-gray-700">
+            <LogoutButton
+              isLoggingOut={isLoggingOut}
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+            />
+          </div>
         </div>
       )}
     </nav>

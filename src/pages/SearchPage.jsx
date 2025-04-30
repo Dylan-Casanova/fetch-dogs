@@ -109,7 +109,7 @@ const SearchPage = () => {
   return (
     <div className="container mx-auto p-4 sm:grid search-page">
       <div className="flex justify-between items-center border-b-1 border-gray-200 mb-20">
-        <h1 className="text-3xl font-bold">Search Dogs</h1>
+        <h1 className="text-2xl font-semibold text-gray-700">Search Dogs</h1>
 
         {/* Filters */}
         <div className="grid">
@@ -274,7 +274,7 @@ const SearchPage = () => {
 
       {/* Main Content */}
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
           {Array.from({ length: 6 }).map((_, idx) => (
             <div
               key={idx}
@@ -285,7 +285,7 @@ const SearchPage = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 xl:gap-8 max-w-screen">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8 max-w-screen">
           {dogs.length > 0 ? (
             dogs.map((dog) => (
               <DogCard

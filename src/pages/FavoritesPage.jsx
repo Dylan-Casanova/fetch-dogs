@@ -132,7 +132,7 @@ const FavoritesPage = () => {
   return (
     <div className="container mx-auto p-4 mb-24">
       <div
-        className="flex justify-between items-center py-7
+        className="flex justify-between items-center py-6
       border-b-1 border-gray-200 mb-20"
       >
         <h1 className="text-gray-700 text-2xl font-semibold">Your Favorites</h1>

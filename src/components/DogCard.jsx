@@ -34,8 +34,8 @@ const DogCard = ({
           onClick={() => onToggleFavorite(dog.id)}
           className={`mt-8 w-20 py-2 ${
             isFavorite
-              ? "bg-red-500 hover:bg-red-600"
-              : "bg-blue-500 hover:bg-blue-600"
+              ? "bg-rose-500 hover:bg-rose-600"
+              : "bg-teal-600 hover:bg-teal-700"
           } text-white rounded flex items-center justify-center space-x-2 justify-self-center  `}
         >
           {isFavorite ? <FaHeart /> : <FaRegHeart />}
