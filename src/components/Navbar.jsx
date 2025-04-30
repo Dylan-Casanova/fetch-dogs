@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { HiOutlineXMark } from "react-icons/hi2";
 import LogoutButton from "./LogoutButton";
 
 const Navbar = () => {
@@ -87,7 +88,11 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle Menu"
           >
-            <RxHamburgerMenu className="w-6 h-6 text-white" />
+            {isMenuOpen ? (
+              <HiOutlineXMark className="w-6 h-6 text-gray-700" />
+            ) : (
+              <RxHamburgerMenu className="w-6 h-6 text-gray-700" />
+            )}
           </button>
         </div>
       </div>

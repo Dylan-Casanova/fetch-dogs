@@ -19,7 +19,9 @@ const DogCard = ({
 
       <div className="grid grid-cols-3 gap-1 text-gray-900 text-sm">
         <p className="border-r border-gray-300 ">{dog.breed}</p>
-        <p className="border-r border-gray-300 px-2 text-center ">{dog.age}</p>
+        <p className="border-r border-gray-300 px-2 text-center ">
+          {dog.age === 0 ? " < 1" : dog.age}
+        </p>
         <p>{dog.zip_code}</p>
       </div>
       <div className="grid grid-cols-3 gap-1 text-gray-400 text-xs">

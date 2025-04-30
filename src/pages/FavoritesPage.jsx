@@ -188,7 +188,7 @@ const FavoritesPage = () => {
       {!loadingMatch && dogs.length > 0 && (
         <div className="mt-10">
           <h2 className="text-2xl font-bold mb-4">Your Favorite Dogs</h2>
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8 max-w-screen">
             {dogs.map((dog) => (
               <DogCard
                 key={dog.id}
@@ -221,7 +221,7 @@ const FavoritesPage = () => {
             >
               <h2 className="text-xl font-bold mb-4">Clear Favorites</h2>
               <p className="mb-4">
-                Are you sure you want to clear all favorite dogs?
+                Are you sure you want to clear all favorited dogs?
               </p>
               <p className="mb-6">
                 You will not be able to generate a new match until you add new
