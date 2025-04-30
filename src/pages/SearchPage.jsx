@@ -65,21 +65,41 @@ const SearchPage = () => {
       const params = buildQueryParams(pageQuery);
       const url = `https://frontend-take-home-service.fetch.com/dogs/search?${params.toString()}`;
 
-      const { data: searchData } = await axios.get(url, {
-        withCredentials: true,
+      const searchRes = await fetch(url, {
+        method: "GET",
+        credentials: "include",
       });
-      const { data: dogsData } = await axios.post(
+
+      if (!searchRes.ok) {
+        throw new Error("Failed to fetch search results");
+      }
+
+      const searchData = await searchRes.json();
+
+      const dogsRes = await fetch(
         "https://frontend-take-home-service.fetch.com/dogs",
-        searchData.resultIds,
-        { withCredentials: true }
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(searchData.resultIds),
+        }
       );
+
+      if (!dogsRes.ok) {
+        throw new Error("Failed to fetch dogs data");
+      }
+
+      const dogsData = await dogsRes.json();
 
       setDogs(dogsData);
       setNext(searchData.next);
       setPrev(searchData.prev);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
-      setError(err.response?.data?.message || "Error fetching dogs");
+      setError(err.message || "Error fetching dogs");
     } finally {
       setIsLoading(false);
     }
