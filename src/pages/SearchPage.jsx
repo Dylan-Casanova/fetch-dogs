@@ -302,7 +302,7 @@ const SearchPage = () => {
       )}
 
       {/* Pagination */}
-      <div className="flex justify-between mt-6">
+      <div className="flex justify-between mt-11 mb-10">
         <button
           onClick={() => handlePagination(prev)}
           disabled={!prev || isLoading}

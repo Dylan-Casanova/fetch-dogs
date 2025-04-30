@@ -46,12 +46,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" bg-[#9FDCE2] shadow-md py-3 ">
-      <div className="container mx-auto flex items-center justify-between p-4">
+    <nav className=" bg-[#9FDCE2] shadow-xl py-3 sticky top-0 z-50">
+      <div className="container mx-auto flex items-center justify-between p-4 ">
         <div className="flex items-center">
           <Link
             to="/search"
-            className="text-gray-700 text-xl lg:text-2xl font-bold"
+            className="text-gray-700 text-xl lg:text-2xl font-medium hover:text-[#f5f5f5]"
           >
             BF Finder
           </Link>
@@ -60,11 +60,11 @@ const Navbar = () => {
         <div className="hidden md:flex gap-8 items-center text-gray-700">
           <Link
             to="/search"
-            className="text-xl text-gray-700 hover:text-gray-200"
+            className="text-xl text-gray-700 hover:text-[#f5f5f5]"
           >
             Find a Buddy
           </Link>
-          <Link to="/favorites" className="text-xl hover:text-gray-200">
+          <Link to="/favorites" className="text-xl hover:text-[#f5f5f5]">
             Your Favorites
           </Link>
         </div>

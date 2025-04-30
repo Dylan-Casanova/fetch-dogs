@@ -1,5 +1,4 @@
 import React from "react";
-import "./DogCard.css";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const DogCard = ({
@@ -9,23 +8,23 @@ const DogCard = ({
   showFavoriteButton = true,
 }) => {
   return (
-    <div className="dog-card p-4 rounded-lg shadow hover:shadow-lg transition">
+    <div className="p-4 rounded-lg shadow-xl bg-gray-100">
       <img
         src={dog.img}
         alt={dog.name}
-        className="h-48 w-58 object-fit rounded-lg mb-4 justify-self-center "
+        className="h-48 w-58 object-fit rounded-lg mb-4 justify-self-center mb-8 "
         onError={(e) => (e.target.src = "/fallback-dog.png")}
       />
-      <h2 className="text-lg font-semibold">{dog.name}</h2>
+      <h2 className="text-lg font-semibold mb-6">{dog.name}</h2>
 
-      <div className="grid grid-cols-3 gap-1 text-gray-600 text-sm">
-        <p>{dog.breed}</p>
-        <p>{dog.age}</p>
+      <div className="grid grid-cols-3 gap-1 text-gray-900 text-sm">
+        <p className="border-r border-gray-300 ">{dog.breed}</p>
+        <p className="border-r border-gray-300 px-2 text-center ">{dog.age}</p>
         <p>{dog.zip_code}</p>
       </div>
-      <div className="grid grid-cols-3 gap-1 text-gray-600 text-sm">
-        <p>Breed</p>
-        <p>Age</p>
+      <div className="grid grid-cols-3 gap-1 text-gray-400 text-xs">
+        <p className="border-r border-gray-300 px-2 text-center">Breed</p>
+        <p className="border-r border-gray-300 px-2 text-center">Age</p>
         <p>Zip Code</p>
       </div>
 
@@ -33,7 +32,7 @@ const DogCard = ({
         <button
           type="button"
           onClick={() => onToggleFavorite(dog.id)}
-          className={`mt-4 w-20 py-2 ${
+          className={`mt-8 w-20 py-2 ${
             isFavorite
               ? "bg-red-500 hover:bg-red-600"
               : "bg-blue-500 hover:bg-blue-600"

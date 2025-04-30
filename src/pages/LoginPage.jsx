@@ -64,7 +64,7 @@ const LoginPage = () => {
     <div className={styles.container}>
       <form onSubmit={handleLogin} className={styles.loginForm}>
         <div className={styles.formHeading}>
-          <h5 className="text-shadow-xs">
+          <h5 className="text-gray-900 text-shadow-xs">
             Every Hero Needs a Sidekick – Adopt!
           </h5>
         </div>

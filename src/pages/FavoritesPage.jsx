@@ -130,23 +130,30 @@ const FavoritesPage = () => {
   if (!user) return <p>Please login to view your favorites.</p>;
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex gap-4 mb-6">
-        <button
-          disabled={favorites.length === 0}
-          onClick={handleClearFavorites}
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition disabled:opacity-50"
-        >
-          Clear Favorites
-        </button>
+    <div className="container mx-auto p-4 mb-24">
+      <div
+        className="flex justify-between items-center py-7
+      border-b-1 border-gray-200 mb-20"
+      >
+        <h1 className="text-gray-700 text-2xl font-semibold">Your Favorites</h1>
 
-        <button
-          onClick={handleGenerateMatch}
-          disabled={favorites.length === 0 || loadingMatch}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition disabled:opacity-50"
-        >
-          {match ? "Generate New Match" : "Find Match"}
-        </button>
+        <div className="flex gap-4">
+          <button
+            disabled={favorites.length === 0}
+            onClick={handleClearFavorites}
+            className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition disabled:opacity-50"
+          >
+            Clear Favorites
+          </button>
+
+          <button
+            onClick={handleGenerateMatch}
+            disabled={favorites.length === 0 || loadingMatch}
+            className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition disabled:opacity-50"
+          >
+            {match ? "Generate New Match" : "Find Match"}
+          </button>
+        </div>
       </div>
 
       {loadingMatch && (
@@ -164,8 +171,8 @@ const FavoritesPage = () => {
           transition={{ duration: 0.5 }}
           className="mt-10 flex flex-col items-center justify-center"
         >
-          <div className="bg-yellow-100 border-4 border-yellow-400 rounded-xl p-8 shadow-lg text-center max-w-md w-full">
-            <h2 className="text-3xl font-extrabold text-yellow-700 mb-4">
+          <div className="border-2 border-teal-600 rounded-xl p-8 shadow-lg text-center max-w-md w-full">
+            <h2 className="text-3xl font-extrabold text-teal-600 mb-4">
               🎉 Your Perfect Match! 🎉
             </h2>
             <DogCard

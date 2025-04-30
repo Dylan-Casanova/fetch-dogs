@@ -14,12 +14,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('/public/loginPageBg.jpg');
+  background-image: url("/public/loginPageBg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: repeat-y;
   height: 100vh;
-  margin: 0; 
+  margin: 0;
 }
 
 .loginForm {
@@ -44,15 +44,15 @@
 
 .inputGroup {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
 }
 
 .inputGroup .label {
   position: absolute;
-  top: -16px;
+  top: -20px;
   left: 12px;
-  font-size: 12px;
-  color: #58bc82;
+  font-size: 14px;
+  color: #009689;
   font-weight: 600;
   transition: all 0.3s ease;
   opacity: 0.7;
@@ -63,7 +63,7 @@
   padding: 15px 20px;
   font-size: 1rem;
   color: #333;
-  background-color: #f5f5f5;
+  background-color: transparent;
   border: 2px solid #ddd;
   border-radius: 10px;
   outline: none;
@@ -71,24 +71,24 @@
 }
 
 .inputGroup input:focus {
-  border-color: #58bc82;
+  border-color: #009689;
   box-shadow: 0 0 10px rgba(88, 188, 130, 0.4);
 }
 
 .inputGroup input:focus + .label {
   top: -20px;
   font-size: 11px;
-  color: #58bc82;
+  color: #009689;
   opacity: 1;
 }
 
 .submit {
   width: 100%;
   padding: 15px;
-  background-color: #58bc82;
+  background-color: #009689;
   color: #fff;
   border: none;
-  border-radius: 30px;
+  border-radius: 10px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -96,7 +96,7 @@
 }
 
 .submit:hover {
-  background-color: #45a56b;
+  background-color: #00786f;
   transform: translateY(-2px);
   box-shadow: 0 5px 20px rgba(88, 188, 130, 0.3);
 }
